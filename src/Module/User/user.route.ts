@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { userController } from "./user.controller";
 console.log("==> user.controller loaded");
-import { verifyJwtToken, verifyOtpJwtToken } from "../../middleware/Auth.middleware";
+import { verifyJwtToken} from "../../middleware/Auth.middleware";
 
 
 const userRouter = Router();

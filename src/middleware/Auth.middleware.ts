@@ -26,7 +26,7 @@ async function verifyToken(
 }
 
 // access token cheak
-export const verifyJwtTokenmongo = asyncHandler(
+export const verifyJwtToken = asyncHandler(
   async (req: Request, _res: Response, next: NextFunction) => {
     const secret = process.env.ACCESS_TOKEN_SECRET;
     if (!secret) throw new ApiError(500, "ACCESS_TOKEN_SECRET not configured");

@@ -11,7 +11,6 @@ import bcrypt from "bcrypt";
 import jwt, { SignOptions } from "jsonwebtoken";
 import "dotenv/config";
 import { BaseModel } from "../../Base/Base.model";
-import { Account } from "../Account/account.model";
 
 @pre<User>("save", async function () {
   if (!this.isModified("password")) return;
