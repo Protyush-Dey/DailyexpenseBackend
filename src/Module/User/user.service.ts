@@ -3,7 +3,7 @@ import { ApiError } from "../../utils/ApiError";
 import { BaseService } from "../../Base/Base.service";
 import { User, UserModel } from "./user.model";
 import { generateOTP } from "../../utils/otp"; // plug in your OTP util
-import { ExpenseModel } from "../Expense/expences.model";
+// import { ExpenseModel } from "../Expense/expences.model";
 import mongoose from "mongoose";
 
 export class UserService extends BaseService<User> {

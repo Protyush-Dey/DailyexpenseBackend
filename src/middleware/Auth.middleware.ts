@@ -5,7 +5,6 @@ import { asyncHandler } from "../utils/AsyncHandler";
 import { UserModel } from "../Module/User/user.model";
 import { DocumentType } from "@typegoose/typegoose";
 import { User } from "../Module/User/user.model";
-import { db } from "../config/mysqlconfig";
 
 // This gives `req.user` full type safety everywhere in the codebase.
 declare global {
@@ -38,7 +37,7 @@ export const verifyJwtToken = asyncHandler(
 
     const decoded = await verifyToken(token, secret);
 
-     const user = await User.findById(decoded._id);
+     const user = await UserModel.findById(decoded._id);
     if (!user) throw new ApiError(401, "Invalid access token");
     req.user = user;
     next();
