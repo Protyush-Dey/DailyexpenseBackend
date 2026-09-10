@@ -4,8 +4,7 @@ import cors from "cors";
 import http from "http";
 import cookieParser from "cookie-parser";
 import { connectDb } from "./config/mongooseConfig";
-import initializeModules from "./Modulecopy/main.route"
-
+import initializeModules from "./Module/main.route.ts"
 
 dotenv.config();
 const app = express();

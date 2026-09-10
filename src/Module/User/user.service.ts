@@ -53,7 +53,7 @@ export class UserService extends BaseService<User> {
     const user = await this.create({ fullName, email, password });
 
     const createdUser = await UserModel.findById(user._id).select(
-      "-password -refreshToken"
+      "-password"
     );
     if (!createdUser) throw new ApiError(500, "User creation failed");
 
