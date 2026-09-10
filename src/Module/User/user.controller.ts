@@ -8,9 +8,10 @@ import { UserService } from "./user.service";
 const userService = new UserService();
 
 class UserController extends BaseController {
+
   // register the user
   registerUser = asyncHandler(async (req: Request, res: Response) => {
-    const {fullName, email, password } = req.body as Record<
+    const { fullName, email, password } = req.body as Record<
       string,
       string
     >;
@@ -31,15 +32,15 @@ class UserController extends BaseController {
 
   // login the user
   // loginUser = asyncHandler(async (req: Request, res: Response) => {
-  //   const { loginInfo, password } = req.body as {
+  //   const { email, password } = req.body as {
   //     loginInfo: string;
   //     password: string;
   //   };
-  //   if (!loginInfo?.trim() || !password?.trim())
+  //   if (!email?.trim() || !password?.trim())
   //     throw new ApiError(400, "All fields are required");
 
   //   const { loginData, accessToken, refreshToken } =
-  //     await userService.loginUser(loginInfo, password);
+  //     await userService.loginUser(email, password);
 
   //   return res
   //     .status(200)
@@ -52,6 +53,28 @@ class UserController extends BaseController {
   //       }),
   //     );
   // });
+  // mobile
+  loginUserMobile = asyncHandler(async (req: Request, res: Response) => {
+    const { email, password } = req.body as {
+      loginInfo: string;
+      password: string;
+    };
+    if (!email?.trim() || !password?.trim())
+      throw new ApiError(400, "All fields are required");
+
+    const { loginData, accessToken, refreshToken } =
+      await userService.loginUser(email, password);
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, "Logged in successfully", {
+          user: loginData,
+          accestoken:accessToken,
+          refreshToken:refreshToken
+        }),
+      );
+  });
 
 
   // //me
