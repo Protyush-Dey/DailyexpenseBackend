@@ -5,7 +5,6 @@ import http from "http";
 import cookieParser from "cookie-parser";
 import { connectDb } from "./config/mongooseConfig";
 import initializeModules from "./Modulecopy/main.route"
-import { connectsql } from "./config/mysqlconfig";
 
 
 dotenv.config();
@@ -17,7 +16,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 
 const server = http.createServer(app);
-// initializeModules(app);
+initializeModules(app);
 
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {

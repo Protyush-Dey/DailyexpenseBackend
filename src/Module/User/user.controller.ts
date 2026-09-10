@@ -1,13 +1,8 @@
 import { Request, Response } from "express";
-console.log("==> hand loaded");
 import { asyncHandler } from "../../utils/AsyncHandler";
-console.log("==> err loaded");
 import { ApiError } from "../../utils/ApiError";
-console.log("==> res loaded");
 import { ApiResponse } from "../../utils/ApiResponse";
-console.log("==> basec loaded");
 import { BaseController } from "../../Base/Base.controller";
-console.log("==> user.service loaded");
 import { UserService } from "./user.service";
 
 const userService = new UserService();
@@ -15,12 +10,11 @@ const userService = new UserService();
 class UserController extends BaseController {
   // register the user
   registerUser = asyncHandler(async (req: Request, res: Response) => {
-    const { userName, fullName, email, password } = req.body as Record<
+    const {fullName, email, password } = req.body as Record<
       string,
       string
     >;
     if (
-      !userName?.trim() ||
       !fullName?.trim() ||
       !email?.trim() ||
       !password?.trim()
@@ -28,7 +22,6 @@ class UserController extends BaseController {
       throw new ApiError(400, "All fields are required");
 
     const user = await userService.registerUser({
-      userName,
       fullName,
       email,
       password,
@@ -133,58 +126,6 @@ class UserController extends BaseController {
       .json(new ApiResponse(200, "Password changed"));
   });
 
-  // find a friend
-  findUser = asyncHandler(async (req: Request, res: Response) => {
-    const { loginInfo } = req.params;
-    if (!loginInfo?.toString().trim())
-      throw new ApiError(400, "Give the fields");
-
-    const user = await userService.findUser(loginInfo.toString());
-    return res.status(200).json(new ApiResponse(200, "Account found", user));
-  });
-
-  // get expense with the same month
-  getMonthExpenseOfUser = asyncHandler(async (req: Request, res: Response) => {
-    const expenses = await userService.getExpenseOfUserByDates(
-      this.getUserId(req),
-    );
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "Get expenses of this month", expenses));
-  });
-
-  // get expense with the given date
-  getExpenseOfUserByDates = asyncHandler(
-    async (req: Request, res: Response) => {
-      const { startOfMonth, endOfMonth } = req.query as {
-        startOfMonth?: string;
-        endOfMonth?: string;
-      };
-      if (!startOfMonth || !endOfMonth)
-        throw new ApiError(400, "Send the dates");
-
-      const expenses = await userService.getExpenseOfUserByDates(
-        this.getUserId(req),
-        startOfMonth,
-        endOfMonth,
-      );
-      return res
-        .status(200)
-        .json(new ApiResponse(200, "Get expenses of dates", expenses));
-    },
-  );
-
-  // change primary account
-  changePrimaryAccount = asyncHandler(async (req: Request, res: Response) => {
-    const { accountId } = req.params;
-    await userService.changePrimaryAccount(
-      this.getUserId(req),
-      accountId.toString(),
-    );
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "Primary account changed"));
-  });
 }
 
 export const userController = new UserController();

@@ -24,15 +24,15 @@ import { Account } from "../Account/account.model";
   },
 })
 export class User extends BaseModel {
-  @prop({
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    index: true,
-    type: () => String,
-  })
-  public userName!: string;
+  // @prop({
+  //   required: true,
+  //   unique: true,
+  //   lowercase: true,
+  //   trim: true,
+  //   index: true,
+  //   type: () => String,
+  // })
+  // public userName!: string;
 
   @prop({
     required: true,
@@ -51,23 +51,23 @@ export class User extends BaseModel {
   })
   public email!: string;
 
-  @prop({ ref: "Account", type: () => mongoose.Schema.Types.ObjectId })
-public cashAccount?: Ref<any>;
+//   @prop({ ref: "Account", type: () => mongoose.Schema.Types.ObjectId })
+// public cashAccount?: Ref<any>;
 
-@prop({ ref: "Account", type: () => mongoose.Schema.Types.ObjectId })
-public primaryAccount?: Ref<any>;
+// @prop({ ref: "Account", type: () => mongoose.Schema.Types.ObjectId })
+// public primaryAccount?: Ref<any>;
 
   @prop({ required: true, type: () => String })
   public password!: string;
 
-  @prop({ type: () => String })
-  public refreshToken?: string;
+  // @prop({ type: () => String })
+  // public refreshToken?: string;
 
-  @prop({ type: () => String })
-  public passwordResetOTP?: string;
+  // @prop({ type: () => String })
+  // public passwordResetOTP?: string;
 
-  @prop({ type: () => Date })
-  public passwordResetExpires?: Date;
+  // @prop({ type: () => Date })
+  // public passwordResetExpires?: Date;
 
 
   // functions
@@ -106,15 +106,15 @@ public primaryAccount?: Ref<any>;
     });
   }
 
-  public generateOtpToken(this: DocumentType<User>): string {
-    const secret = process.env.OTP_TOKEN_SECRET;
-    const expiry = process.env.OTP_TOKEN_EXPIRY;
-    if (!secret || !expiry) throw new Error("OTP_TOKEN env vars missing");
+  // public generateOtpToken(this: DocumentType<User>): string {
+  //   const secret = process.env.OTP_TOKEN_SECRET;
+  //   const expiry = process.env.OTP_TOKEN_EXPIRY;
+  //   if (!secret || !expiry) throw new Error("OTP_TOKEN env vars missing");
 
-    return jwt.sign({ _id: this._id, email: this.email }, secret, {
-      expiresIn: expiry as SignOptions["expiresIn"],
-    });
-  }
+  //   return jwt.sign({ _id: this._id, email: this.email }, secret, {
+  //     expiresIn: expiry as SignOptions["expiresIn"],
+  //   });
+  // }
 }
 
 export const UserModel = getModelForClass(User);
