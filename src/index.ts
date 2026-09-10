@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(cookieParser());
 
 const server = http.createServer(app);
-initializeModules(app);
+// initializeModules(app);
 
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
