@@ -56,7 +56,7 @@ class UserController extends BaseController {
   // mobile
   loginUserMobile = asyncHandler(async (req: Request, res: Response) => {
     const { email, password } = req.body as {
-      loginInfo: string;
+      email: string;
       password: string;
     };
     if (!email?.trim() || !password?.trim())
