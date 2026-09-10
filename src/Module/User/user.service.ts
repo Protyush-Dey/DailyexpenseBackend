@@ -61,23 +61,23 @@ export class UserService extends BaseService<User> {
 
 
   //   // login the user
-    async loginUser(email: string, password: string) {
-      const user = await UserModel.findOne({ email: email.trim() });
-      if (!user) throw new ApiError(404, "User not found");
+  async loginUser(email: string, password: string) {
+    const user = await UserModel.findOne({ email: email.trim() });
+    if (!user) throw new ApiError(404, "User not found");
 
-      const isValid = await user.isPasswordCorrect(password);
-      if (!isValid) throw new ApiError(401, "Incorrect password");
+    const isValid = await user.isPasswordCorrect(password);
+    if (!isValid) throw new ApiError(401, "Incorrect password");
 
-      const { accessToken, refreshToken } = await this.generateTokens(
-        String(user._id)
-      );
+    const { accessToken, refreshToken } = await this.generateTokens(
+      String(user._id)
+    );
 
-      const loginData = await UserModel.findById(user._id).select(
-        "-password"
-      );
+    const loginData = await UserModel.findById(user._id).select(
+      "-password -createdAt -updatedAt"
+    );
 
-      return { loginData, accessToken, refreshToken };
-    }
+    return { loginData, accessToken, refreshToken };
+  }
 
 
   //   // logout the user
