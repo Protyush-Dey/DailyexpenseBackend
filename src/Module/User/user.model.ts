@@ -88,7 +88,6 @@ export class User extends BaseModel {
         _id: this._id,
         fullName: this.fullName,
         email: this.email,
-        userName: this.userName,
       },
       secret,
       { expiresIn: expiry as SignOptions["expiresIn"] },

@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { userController } from "./user.controller";
-console.log("==> user.controller loaded");
 import { verifyJwtToken} from "../../middleware/Auth.middleware";
 
 
@@ -17,8 +16,8 @@ const userRouter = Router();
 // userRouter.get("/findUser/:loginInfo", userController.findUser);
 
 // have not tested yet
-userRouter.get("/getMonthExpenseOfUser", verifyJwtToken, userController.getMonthExpenseOfUser);
-userRouter.get("/getExpenseOfUserByDates", verifyJwtToken, userController.getExpenseOfUserByDates);
-userRouter.patch("/changePrimaryAccount/:accountId", verifyJwtToken, userController.changePrimaryAccount);
+// userRouter.get("/getMonthExpenseOfUser", verifyJwtToken, userController.getMonthExpenseOfUser);
+// userRouter.get("/getExpenseOfUserByDates", verifyJwtToken, userController.getExpenseOfUserByDates);
+// userRouter.patch("/changePrimaryAccount/:accountId", verifyJwtToken, userController.changePrimaryAccount);
 
 export default userRouter;
